@@ -6,7 +6,7 @@ import (
 
 func Landing() {
 	fmt.Println("Hello World")
-	fmt.Println(getPaternalUncle("Yodhan"))
+	fmt.Println(getPaternalUncle("Abc"))
 }
 
 func getPaternalUncle(name string) (res []string) {
@@ -14,11 +14,11 @@ func getPaternalUncle(name string) (res []string) {
 
 	fmt.Println("From App: ", member)
 
-	for _, v := range member.Parent.Parent.Children {
-		if v.Gender == "male" && v.Spouse.Name != name {
-			res = append(res, v.Name)
-		}
-	}
+	// for _, v := range member.Parent.Parent.Children {
+	// 	if v.Gender == "male" && v.Spouse.Name != name {
+	// 		res = append(res, v.Name)
+	// 	}
+	// }
 
 	return res
 }

@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -37,16 +36,26 @@ func (member *Member) GetChildren(name string) *Member {
 	return nil
 }
 
-var m *Member
+func (member *Member) CreateSpouse(name string, gender string) *Member {
+	m := Member{
+		Name:      name,
+		Gender:    gender,
+		Spouse:    member,
+		TimeAdded: time.Now(),
+	}
+	return &m
+}
 
 func (member *Member) FindMember(name string) *Member {
-
 	if (*member).Name == name {
-		fmt.Println("FROM Models: ", (*member).Name)
 		return member
+	} else if (*member).Spouse.Name == name {
+		return (*member).Spouse
 	}
 	for _, v := range member.Children {
-		m = v.FindMember(name)
+		if x := v.FindMember(name); x != nil {
+			return x
+		}
 	}
-	return m
+	return nil
 }

@@ -42,24 +42,12 @@ func initFamilyTree() {
 			Gender: "male",
 		},
 		{
-			Name:   "Lika",
-			Gender: "female",
-		},
-		{
 			Name:   "Aras",
 			Gender: "male",
 		},
 		{
-			Name:   "Chitra",
-			Gender: "female",
-		},
-		{
 			Name:   "Satya",
 			Gender: "female",
-		},
-		{
-			Name:   "Vyan",
-			Gender: "male",
 		},
 	}
 
@@ -67,14 +55,14 @@ func initFamilyTree() {
 		queen.AddChildren(v)
 	}
 
-	chit := queen.GetChildren("Chit")
-	amba := queen.GetChildren("Amba")
-	vich := queen.GetChildren("Vich")
-	lika := queen.GetChildren("Lika")
-	aras := queen.GetChildren("Aras")
-	chitra := queen.GetChildren("Chitra")
-	satya := queen.GetChildren("Satya")
-	vyan := queen.GetChildren("Vyan")
+	chit := queen.FindMember("Chit")
+	amba := chit.AddSpouse("Amba", "female")
+	vich := queen.FindMember("Vich")
+	lika := vich.AddSpouse("Lika", "female")
+	aras := queen.FindMember("Aras")
+	chitra := aras.AddSpouse("Chitra", "female")
+	satya := queen.FindMember("Satya")
+	_ = satya.AddSpouse("Vyan", "male")
 
 	m = []models.Children{
 		{
@@ -95,15 +83,6 @@ func initFamilyTree() {
 		amba.AddChildren(v)
 	}
 
-	chit.Spouse = amba
-	amba.Spouse = chit
-	vich.Spouse = lika
-	lika.Spouse = vich
-	aras.Spouse = chitra
-	chitra.Spouse = aras
-	satya.Spouse = vyan
-	vyan.Spouse = satya
-
 	m = []models.Children{
 		{
 			Name:   "Vila",
@@ -121,10 +100,6 @@ func initFamilyTree() {
 
 	m = []models.Children{
 		{
-			Name:   "Arit",
-			Gender: "male",
-		},
-		{
 			Name:   "Jnki",
 			Gender: "female",
 		},
@@ -140,16 +115,8 @@ func initFamilyTree() {
 
 	m = []models.Children{
 		{
-			Name:   "Satvy",
-			Gender: "female",
-		},
-		{
 			Name:   "Asva",
 			Gender: "male",
-		},
-		{
-			Name:   "Krpi",
-			Gender: "female",
 		},
 		{
 			Name:   "Vyas",
@@ -165,14 +132,14 @@ func initFamilyTree() {
 		satya.AddChildren(v)
 	}
 
-	dritha := amba.GetChildren("Dritha")
-	jaya := dritha.CreateSpouse("Jaya", "male")
-	arit := queen.FindMember("Arit")
-	jnki := chitra.GetChildren("Jnki")
-	asva := satya.GetChildren("Asva")
-	satvy := asva.CreateSpouse("Satvy", "female")
-	vyas := satya.GetChildren("Vyas")
-	krpi := vyas.CreateSpouse("Krpi", "female")
+	dritha := amba.FindMember("Dritha")
+	_ = dritha.AddSpouse("Jaya", "male")
+	jnki := chitra.FindMember("Jnki")
+	_ = jnki.AddSpouse("Arit", "male")
+	asva := satya.FindMember("Asva")
+	satvy := asva.AddSpouse("Satvy", "female")
+	vyas := satya.FindMember("Vyas")
+	krpi := vyas.AddSpouse("Krpi", "female")
 
 	m = []models.Children{
 		{
@@ -184,11 +151,6 @@ func initFamilyTree() {
 	for _, v := range m {
 		dritha.AddChildren(v)
 	}
-
-	dritha.Spouse = jaya
-	jaya.Spouse = dritha
-	arit.Spouse = jnki
-	jnki.Spouse = arit
 
 	m = []models.Children{
 		{
